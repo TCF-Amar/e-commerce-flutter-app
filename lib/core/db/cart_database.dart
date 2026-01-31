@@ -17,21 +17,7 @@ class CartDatabase {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = '$dbPath$filePath';
-    return await openDatabase(
-      path,
-      version: 2,
-      onCreate: _createDB,
-      onUpgrade: _upgradeDB,
-    );
-  }
-
-  Future<void> _upgradeDB(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 2) {
-      // Add size column to existing cart table
-      await db.execute('''
-        ALTER TABLE $tableCart ADD COLUMN ${CartFields.size} TEXT NOT NULL DEFAULT 'M'
-      ''');
-    }
+    return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
   Future<void> _createDB(Database db, int version) async {
