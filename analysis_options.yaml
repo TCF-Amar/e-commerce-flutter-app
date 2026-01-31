@@ -1,0 +1,6 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    unnecessary_underscores: ignore
+  # errors:
+    # unused_import: ignore
